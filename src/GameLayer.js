@@ -7,6 +7,10 @@
  */
 var GameLayer = cc.Layer.extend({
     init:function(){
-        alert("init is OK!");
+        this._super();
+
+
+
+
     }
 })

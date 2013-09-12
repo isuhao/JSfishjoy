@@ -10,43 +10,47 @@ var GameScene = cc.Scene.extend({
 //    ctor:function(){
 //        console.log("GameScene's init is OK!");
 //    },
-    _that:null,
+
     preloadResources:function(){
         console.log("preloadResources is OK!");
         var spriteFrameChche = cc.SpriteFrameCache.getInstance();
         spriteFrameChche.addSpriteFrames(plist_fishingjoy_resource);
         //spriteFrameChche.addSpriteFrames(plist_explosion);
     },
+
     onEnter:function(){
+        this._super();
+
         this.preloadResources();
 
-        this._super();
-        console.log(this);
-        _that = this;
-        setTimeout(this.loadLayers,100);
+        var _that = this;
+        setTimeout(function(){
+            _that.loadLayers();
+        },100);
     },
     loadLayers:function(){
 
         console.log("delay is OK");
+
         var backgroundLayer = new BackgroundLayer();
         backgroundLayer.init();
-        _that.addChild(backgroundLayer);
+        this.addChild(backgroundLayer);
 
         var fishLayer = new FishLayer();
         fishLayer.init();
-        _that.addChild(fishLayer);
+        this.addChild(fishLayer);
 
 //        var cannonLayer = new CannonLayer();
 //        cannonLayer.init();
-//        gameScene.addChild(cannonLayer);
+//        this.addChild(cannonLayer);
 
 //        var menuLayer = new MenuLayer();
 //        menuLayer.init();
-//        gameScene.addChild(menuLayer);
+//        this.addChild(menuLayer);
 //
 //        var panelLayer = new PanelLayer();
 //        panelLayer.init();
-//        gameScene.addChild(panelLayer);
+//        _that.addChild(panelLayer);
     },
     pause:function(){
 

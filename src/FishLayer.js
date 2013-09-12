@@ -8,20 +8,20 @@
 var FishLayer = cc.Layer.extend({
     _fishes:[],
     _capacity:20,
-    _that:null,
 
     init:function(){
+        this._super();
         console.log("FishLayer's init is OK!");
 
-        _that = this;
         //1.init fish into _fishes
         for(var i=0;i<this._capacity;i++){
             var fish = Fish.create();
             this._fishes.push(fish);
-        }
+       }
 
-        cc.Director.getInstance().getScheduler().scheduleCallbackForTarget(
-            this,this.addFish(),2000,cc.REPEAT_FOREVER,100,false);
+        this.schedule(this.addFish,2);
+        //cc.Director.getInstance().getScheduler().scheduleCallbackForTarget(
+        //    this,this.addFish,2,cc.REPEAT_FOREVER,0,false);
     },
     setCapacity:function(capacity)
     {
@@ -34,15 +34,17 @@ var FishLayer = cc.Layer.extend({
       return cc.p(PosX,PosY);
     },
     onEnter:function(){
-
+        this._super();
     },
-    addFish:function(dt){
+    addFish:function(){
         console.log("add Fish");
+
         var addCount = 10;
         for(var i=0;i<addCount;i++){
             var fish = this._fishes[i];
             fish.setPosition(this.generateRandom());
-            this.addChild(fish,1);
+            this.addChild(fish,5);
         }
+
     }
 })

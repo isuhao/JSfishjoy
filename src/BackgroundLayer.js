@@ -7,6 +7,7 @@
  */
 var BackgroundLayer = cc.Layer.extend({
     init:function(){
+        this._super();
         console.log("BackgroundLayer's init is OK!");
 
         var director = cc.Director.getInstance();
@@ -14,8 +15,11 @@ var BackgroundLayer = cc.Layer.extend({
         var sprite = cc.Sprite.createWithSpriteFrameName("background.png");
         //var sprite = cc.Sprite.create("FishingJoy_Resources/background.png");
         sprite.setScale(1.32);
-        this.addChild(sprite);
+        this.addChild(sprite,0);
         sprite.setPosition(cc.p(winSize.width/2,winSize.height/2));
+
+
+
 
         return true;
     }
