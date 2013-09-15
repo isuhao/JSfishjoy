@@ -1,36 +1,54 @@
 /**
  * Created with JetBrains WebStorm.
- * User: admin
+ * User: cl
  * Date: 13-9-8
  * Time: 下午2:10
  * To change this template use File | Settings | File Templates.
  */
-var Fish = cc.Class.extend({
+var Fish = cc.Node.extend({
     _fishType:{k_Fish_Type_Red:0,k_Fish_Type_Green:1,k_Fish_Type_Count:2},
-    _fishSprite:null,
+    _fishAnimFrames :7,
 
-    ctor:function(){
-
-    },
     addFish:function(){
         var type = parseInt(Math.random()*3);
+        var fishSprite;
         switch(type)
         {
             case 0:
-                this._fishSprite = cc.Sprite.createWithSpriteFrameName("fish_0_1.png");
+                fishSprite = cc.Sprite.createWithSpriteFrameName("fish_0_1.png");
                 break;
             case 1:
-                this._fishSprite = cc.Sprite.createWithSpriteFrameName("fish_1_1.png");
+                fishSprite = cc.Sprite.createWithSpriteFrameName("fish_1_1.png");
                 break;
             case 2:
-                this._fishSprite = cc.Sprite.createWithSpriteFrameName("fish_0_3.png");
+                fishSprite = cc.Sprite.createWithSpriteFrameName("fish_0_3.png");
                 break;
+
         }
+        this.addChild(fishSprite);
+        fishSprite.setPosition(this.generateRandom());
+        this.fishAnimation(type,fishSprite);
+    },
+    fishAnimation:function(type,sprite){
+        var animFrames = [];
+        var str="";
+        for(var i=0;i<this._fishAnimFrames;i++){
+            if(type == 0 || type == 2)
+                str = "fish_0_" + i + ".png";
+            if(type == 1)
+                str = "fish_1_" + i + ".png";
+            var frame = cc.SpriteFrameCache.getInstance().getSpriteFrame(str);
+            animFrames.push(frame);
+        }
+        var animation = cc.Animation.create(animFrames,0.15);
+        sprite.runAction(cc.RepeatForever.create(cc.Animate.create(animation)));
 
     },
-    getFish:function()
-    {
-        return this._fishSprite;
+    generateRandom:function(){
+        var PosX = Math.random()*(Global.getWndWidth()-100) + 50;
+        var PosY = Math.random()*(Global.getWndHeight()-100) + 50;
+        console.log(PosX,PosY);
+        return cc.p(PosX,PosY);
     }
 
 })
@@ -39,8 +57,7 @@ Fish.create = function()
     var fish = new Fish();
     if(fish){
         fish.addFish();
-        var a = fish.getFish();
-        return fish.getFish();
+        return fish;
     }
     return null;
 

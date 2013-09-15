@@ -40,17 +40,17 @@ var GameScene = cc.Scene.extend({
         fishLayer.init();
         this.addChild(fishLayer);
 
-//        var cannonLayer = new CannonLayer();
-//        cannonLayer.init();
-//        this.addChild(cannonLayer);
+        var cannonLayer = new CannonLayer();
+        cannonLayer.init();
+        this.addChild(cannonLayer);
 
 //        var menuLayer = new MenuLayer();
 //        menuLayer.init();
 //        this.addChild(menuLayer);
 //
-//        var panelLayer = new PanelLayer();
-//        panelLayer.init();
-//        _that.addChild(panelLayer);
+        var panelLayer = new PanelLayer();
+        panelLayer.init();
+        this.addChild(panelLayer);
     },
     pause:function(){
 

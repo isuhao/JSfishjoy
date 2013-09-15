@@ -20,6 +20,10 @@
         engineDir:'../../cocos2d/',
         //SingleEngineFile:'lib/Cocos2d-html5-v2.1.4.min.js',
         appFiles:[
+            'src/Cannon.js',
+            'src/FishNet.js',
+            'src/Bullet.js',
+            'src/Weapon.js',
             'src/Global.js',
             'src/GameScene.js',
             'src/BackgroundLayer.js',
